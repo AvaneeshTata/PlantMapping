@@ -1,0 +1,57 @@
+{
+    "name": "Plantmappingfinal",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap-cloud-sdk/connectivity": "^3.11.0",
+        "@sap-cloud-sdk/http-client": "^3.11.0",
+        "@sap/cds": "^7",
+        "@sap/cds-hana": "^2",
+        "@sap/xssec": "^3",
+        "express": "^4",
+        "install": "^0.13.0",
+        "node-fetch": "^3.3.2",
+        "npm": "^10.4.0",
+        "nslookup": "^1.1.1",
+        "passport": "^0",
+        "ping": "^0.4.4",
+        "xlsx": "^0.18.5"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^7",
+        "@sap/ux-specification": "^1.120.3",
+        "rimraf": "^3.0.2"
+    },
+    "scripts": {
+        "dev":"cds watch --profile hybrid",
+        "start": "cds-serve",
+        "watch-plantmappingfinall": "cds watch --open plantmappingfinall/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy Plantmappingfinal --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "cds": {
+        "requires": {
+            "destinations": true,
+            "ARIBA_DEV": {
+                "kind": "odata-v2",
+                "credentials": {
+                    "destination": "TEST_DEST"
+                },
+                "destinationOptions": {
+                    "selectionStrategy": "alwaysProvider",
+                    "jwt": null
+                }
+            },
+            "db":"hana",
+            "auth": "dummy"
+        }
+    },
+    "sapux": [
+        "app/plantmappingfinall"
+    ]
+}

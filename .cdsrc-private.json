@@ -1,0 +1,21 @@
+{
+  "requires": {
+    "[hybrid]": {
+      "db": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.eu10-004.hana.ondemand.com",
+          "org": "Tata Projects Limited_btp-dev-0or0hi20",
+          "space": "DEV_SPACE",
+          "instance": "Plantmappingfinal-hdiPlantmapRK2Vo0aJ9sjppcBC0JFUA",
+          "key": "SharedDevKey",
+          "resolved": false
+        },
+        "kind": "hana-cloud",
+        "vcap": {
+          "name": "db"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+VIEW MyService_info AS SELECT
+  info_0.plant,
+  info_0.plant_info
+FROM plant_proj_info AS info_0

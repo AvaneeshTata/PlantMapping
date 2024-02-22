@@ -1,0 +1,9 @@
+VIEW MyService_plant AS SELECT
+  plant_0.createdAt,
+  plant_0.createdBy,
+  plant_0.modifiedAt,
+  plant_0.modifiedBy,
+  plant_0.plant,
+  plant_0.SBG,
+  plant_0.SBU
+FROM plant_proj_plant AS plant_0

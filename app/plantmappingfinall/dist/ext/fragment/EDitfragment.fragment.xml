@@ -1,0 +1,3 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Button  id="vv43" core:require="{ handler: 'plantmappingfinall/ext/fragment/EDitfragment'}" text="Edit" press="handler.onPress" />
+</core:FragmentDefinition>

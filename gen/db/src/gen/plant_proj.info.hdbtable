@@ -1,0 +1,5 @@
+COLUMN TABLE plant_proj_info (
+  plant NVARCHAR(5000) NOT NULL,
+  plant_info NVARCHAR(5000),
+  PRIMARY KEY(plant)
+)

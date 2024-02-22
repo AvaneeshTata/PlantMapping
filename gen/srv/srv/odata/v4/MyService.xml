@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="MyService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <Singleton Name="ExcelUpload" Type="MyService.ExcelUpload"/>
+        <EntitySet Name="plant" EntityType="MyService.plant"/>
+        <EntitySet Name="info" EntityType="MyService.info"/>
+      </EntityContainer>
+      <EntityType Name="ExcelUpload">
+        <Property Name="excel" Type="Edm.Stream"/>
+      </EntityType>
+      <EntityType Name="plant">
+        <Key>
+          <PropertyRef Name="plant"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="plant" Type="Edm.String" Nullable="false"/>
+        <Property Name="SBG" Type="Edm.String"/>
+        <Property Name="SBU" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="info">
+        <Key>
+          <PropertyRef Name="plant"/>
+        </Key>
+        <Property Name="plant" Type="Edm.String" Nullable="false"/>
+        <Property Name="plant_info" Type="Edm.String"/>
+      </EntityType>
+      <Annotations Target="MyService.ExcelUpload/excel">
+        <Annotation Term="Core.MediaType" String="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+      </Annotations>
+      <Annotations Target="MyService.plant">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="Plant"/>
+              <PropertyValue Property="Value" Path="plant"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="SBG"/>
+              <PropertyValue Property="Value" Path="SBG"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Label" String="SBU"/>
+              <PropertyValue Property="Value" Path="SBU"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="createdAt"/>
+              <Annotation Term="UI.Hidden" Bool="true"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="createdBy"/>
+              <Annotation Term="UI.Hidden" Bool="true"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="modifiedAt"/>
+              <Annotation Term="UI.Hidden" Bool="true"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="modifiedBy"/>
+              <Annotation Term="UI.Hidden" Bool="true"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup1">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="plant"/>
+                  <PropertyValue Property="Value" Path="plant"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="SBG"/>
+                  <PropertyValue Property="Value" Path="SBG"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="SBU"/>
+                  <PropertyValue Property="Value" Path="SBU"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="control_plant"/>
+                  <PropertyValue Property="Value" Path="control_plant"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="control_SBG"/>
+                  <PropertyValue Property="Value" Path="control_SBG"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="control_SBU"/>
+                  <PropertyValue Property="Value" Path="control_SBU"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="ID" String="GeneratedFacet1"/>
+              <PropertyValue Property="Label" String="General Information"/>
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.SelectionPresentationVariant" Qualifier="table">
+          <Record Type="UI.SelectionPresentationVariantType">
+            <PropertyValue Property="PresentationVariant">
+              <Record Type="UI.PresentationVariantType">
+                <PropertyValue Property="Visualizations">
+                  <Collection>
+                    <AnnotationPath>@UI.LineItem</AnnotationPath>
+                  </Collection>
+                </PropertyValue>
+                <PropertyValue Property="SortOrder">
+                  <Collection>
+                    <Record Type="Common.SortOrderType">
+                      <PropertyValue Property="Property" PropertyPath="createdAt"/>
+                      <PropertyValue Property="Descending" Bool="true"/>
+                    </Record>
+                  </Collection>
+                </PropertyValue>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="SelectionVariant">
+              <Record Type="UI.SelectionVariantType">
+                <PropertyValue Property="SelectOptions">
+                  <Collection/>
+                </PropertyValue>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="MyService.EntityContainer/plant">
+        <Annotation Term="UI.SelectionPresentationVariant" Qualifier="table">
+          <Record Type="UI.SelectionPresentationVariantType">
+            <PropertyValue Property="PresentationVariant">
+              <Record Type="UI.PresentationVariantType">
+                <PropertyValue Property="Visualizations">
+                  <Collection>
+                    <AnnotationPath>@UI.LineItem</AnnotationPath>
+                  </Collection>
+                </PropertyValue>
+                <PropertyValue Property="SortOrder">
+                  <Collection>
+                    <Record Type="Common.SortOrderType">
+                      <PropertyValue Property="Property" PropertyPath="createdAt"/>
+                      <PropertyValue Property="Descending" Bool="true"/>
+                    </Record>
+                  </Collection>
+                </PropertyValue>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="SelectionVariant">
+              <Record Type="UI.SelectionVariantType">
+                <PropertyValue Property="SelectOptions">
+                  <Collection/>
+                </PropertyValue>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="MyService.plant/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="MyService.plant/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="MyService.plant/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="MyService.plant/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="MyService.info/plant">
+        <Annotation Term="Common.Label" String="Plant"/>
+      </Annotations>
+      <Annotations Target="MyService.info/plant_info">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

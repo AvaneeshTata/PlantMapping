@@ -1,0 +1,10 @@
+COLUMN TABLE plant_proj_plant (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  plant NVARCHAR(5000) NOT NULL,
+  SBG NVARCHAR(5000),
+  SBU NVARCHAR(5000),
+  PRIMARY KEY(plant)
+)
