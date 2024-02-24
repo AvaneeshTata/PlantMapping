@@ -174,7 +174,7 @@ sap.ui.define([
                                       listreporttable.refresh();
                                       oDialog.close();
                                   },
-                                  error: function (error) {
+                                  error: function (error) {     
                                  
                                     if (error.responseJSON && error.responseJSON.error && error.responseJSON.error.message === "Entity already exists") {
                                         MessageToast.show("Entry with this Plant already exists");

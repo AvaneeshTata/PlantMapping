@@ -118,7 +118,6 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                 }
             };
         };
-
         return {
             upload: function (oBindingContext, aSelectedContexts) {
                 debugger

@@ -20,23 +20,23 @@ module.exports = cds.service.impl(async function () {
     //         SBG: "fghj",
     //         SBU: "ds",
     //     },];
-    // this.before('READ', info, async (req) => {
-    //     let AribaSrv = await cds.connect.to("ARIBA_DEV")
-    //          let resultOdata = await AribaSrv.tx(req).get("/opu/odata/sap/ZARB_BTP_PLANT_SRV_01/PlantSet?$format=json")
-    //             console.log("start")
-    //             console.log(resultOdata);
-    //             console.log("end")
-    //             const data = resultOdata;
-    //             const entries = [];
-    //             for (const entry of data) {
-    //                 entries.push({
-    //                     plant: entry.WERKS,
-    //                     plant_info:entry.NAME1
-    //                 })
-    //               }
-    //               await cds.tx(req).run(DELETE(info));
-    //               await cds.tx(req).run(INSERT.into(info).entries(entries));
-    //   });
+    this.before('READ', info, async (req) => {
+        let AribaSrv = await cds.connect.to("ARIBA_DEV")
+             let resultOdata = await AribaSrv.tx(req).get("/opu/odata/sap/ZARB_BTP_PLANT_SRV_01/PlantSet?$format=json")
+                console.log("start")
+                console.log(resultOdata);
+                console.log("end")
+                const data = resultOdata;
+                const entries = [];
+                for (const entry of data) {
+                    entries.push({
+                        plant: entry.WERKS,
+                        plant_info:entry.NAME1
+                    })
+                  }
+                  await cds.tx(req).run(DELETE(info));
+                  await cds.tx(req).run(INSERT.into(info).entries(entries));
+      });
     this.on('PUT', ExcelUpload, async (req, next) => {
         if (req.data.excel) {
             var entity = req.headers.slug;
@@ -115,8 +115,5 @@ module.exports = cds.service.impl(async function () {
         return insertResult; //returns response to excel upload entity
 
     };
-
-
-
 
 });
